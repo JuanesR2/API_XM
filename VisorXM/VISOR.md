@@ -1,5 +1,4 @@
 
-![Logo MME](logo.png)
 
 # Visor XM – SiMEM vía Python  
 **Prototipo de tablero de datos para el mercado eléctrico colombiano**
