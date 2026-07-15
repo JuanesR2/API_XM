@@ -1,0 +1,32 @@
+name: Temporary XM hydro fetch for DNA analysis
+
+on:
+  pull_request:
+    branches: [master]
+
+permissions:
+  contents: read
+
+jobs:
+  fetch-hydro:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Fetch XM reservoir series
+        run: python scripts/fetch_hydro_for_dna.py
+
+      - name: Upload reservoir series
+        uses: actions/upload-artifact@v4
+        with:
+          name: xm-embalses-sin-2019-2026
+          path: outputs/xm_embalses_sin_2019_2026.csv
+          if-no-files-found: error
+          retention-days: 3
